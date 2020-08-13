@@ -17,7 +17,7 @@ public class SmartCam : MonoBehaviour
     // Start is called before the first frame update
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * Speed) + new Vector3(0, 0, -10);
+        transform.position = Vector3.Lerp(transform.position, target.position + new Vector3(0, 2), Time.deltaTime * Speed) + new Vector3(0, 0, -10);
 
     }
 }

@@ -1,19 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+using UnityEngine.Events;
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(GroundCheck))]
+public class PlayerMovement : MonoBehaviour, IPause
 {
-    [Range(1, 20)] public float speed = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [Range(1, 100)] public float speed = 1;
 
+    public UnityEvent OnDead;
+    public UnityEvent OnDamaged;
+
+    bool isPause = false;
+    bool isGround = false;
+    Rigidbody2D _RB;
+    GroundCheck groundCheck;
+    void Awake()
+    {
+        _RB = GetComponent<Rigidbody2D>();
+        groundCheck = GetComponent<GroundCheck>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Jump()
     {
+        if (groundCheck.IsGround)
+        {
+            transform.parent = null;
+            _RB.AddForce(Vector2.up * speed*10);
+        }
+        else
+        {
 
+        }
+    }
+
+
+    public void Play()
+    {
+        isPause = false;
+        _RB.WakeUp();
+    }
+
+    public void Stop()
+    {
+        isPause = true;
+        _RB.Sleep();
     }
 }

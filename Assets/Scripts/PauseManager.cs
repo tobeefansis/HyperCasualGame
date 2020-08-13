@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     public void Toggle()
     {
         isPause = !isPause;
-        if (isPause)
+        if (!isPause)
         {
             Play();
         }
@@ -17,11 +17,6 @@ public class PauseManager : MonoBehaviour
         {
             Stop();
         }
-    }
-
-    private void Start()
-    {
-        Toggle();
     }
 
     public void Play()
