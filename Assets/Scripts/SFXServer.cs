@@ -14,13 +14,16 @@ public class SFXServer : MonoBehaviour
 
     private void Awake()
     {
-        Main = this;
+        if (Main == null)
+        {
+            Main = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
-    void Update()
-    {
-
-    }
 
     public void PlayMusic(AudioClip clip)
     {

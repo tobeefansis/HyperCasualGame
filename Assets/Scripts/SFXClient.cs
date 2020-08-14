@@ -9,7 +9,15 @@ public class SFXClient : MonoBehaviour
     {
         SFXServer.Main.PlayMusic(Clip);
     }
+    public void PlayMusic(AudioClip Clip)
+    {
+        SFXServer.Main.PlayMusic(Clip);
+    }
     public void PlayAudio()
+    {
+        SFXServer.Main.PlayAudio(Clip);
+    }
+    public void PlayAudio(AudioClip Clip)
     {
         SFXServer.Main.PlayAudio(Clip);
     }
