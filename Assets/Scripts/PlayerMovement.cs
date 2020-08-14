@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,10 +10,17 @@ public class PlayerMovement : MonoBehaviour, IPause
     [Range(1, 100)] public float speed = 1;
 
     public UnityEvent OnDead;
-    public UnityEvent OnDamaged;
+    public UnityEvent OnJump;
+
+    internal void Dead()
+    {
+        PauseManager.Main.End();
+        OnDead.Invoke();
+        print("Dead");
+        Destroy(gameObject, 0.4f);
+    }
 
     bool isPause = false;
-    bool isGround = false;
     Rigidbody2D _RB;
     GroundCheck groundCheck;
     void Awake()
@@ -26,7 +34,8 @@ public class PlayerMovement : MonoBehaviour, IPause
         if (groundCheck.IsGround)
         {
             transform.parent = null;
-            _RB.AddForce(Vector2.up * speed*10);
+            _RB.AddForce(Vector2.up * speed * 10);
+            OnJump.Invoke();
         }
         else
         {
