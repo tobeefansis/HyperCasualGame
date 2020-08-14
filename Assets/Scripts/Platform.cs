@@ -4,7 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using System;
 
 public class Platform : MonoBehaviour
 {
@@ -18,7 +17,16 @@ public class Platform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (Random.value > 0.5f)
+        {
+            target.position = pos1.position;
+            movingLeft = true;
+        }
+        else
+        {
+            movingLeft = false;
+            target.position = pos2.position;
+        }
     }
     private void LateUpdate()
     {
