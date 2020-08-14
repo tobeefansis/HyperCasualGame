@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class SmartCam : MonoBehaviour
+public class SmartCam : MonoBehaviour, IPause
 {
 
     [SerializeField] Transform target;
     new Transform transform;
     [Range(1, 20)] [SerializeField] float Speed = 1;
+    bool Pause;
+    public void Play()
+    {
+        Pause = false;
 
+    }
+
+    public void Stop()
+    {
+        Pause = true;
+
+    }
     private void Awake()
     {
         transform = base.transform;
@@ -17,7 +28,9 @@ public class SmartCam : MonoBehaviour
     // Start is called before the first frame update
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + new Vector3(0, 2), Time.deltaTime * Speed) + new Vector3(0, 0, -10);
-
+        if (!Pause)
+        {
+            transform.position = Vector3.Lerp(transform.position, target.position + new Vector3(0, 2), Time.deltaTime * Speed) + new Vector3(0, 0, -10);
+        }
     }
 }
